@@ -65,4 +65,6 @@
 
 - (void)recompute;
 
+-(void)highlightSectorAtIndex:(NSInteger)index;
+
 @end
