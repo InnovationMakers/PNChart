@@ -65,6 +65,7 @@
 
 - (void)recompute;
 
+/** highlights sector **/
 -(void)highlightSectorAtIndex:(NSInteger)index;
 
 @end
