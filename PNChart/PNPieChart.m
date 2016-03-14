@@ -293,7 +293,7 @@
         if ([self.delegate respondsToSelector:@selector(didUnselectPieItem)]) {
             [self.delegate didUnselectPieItem];
         }
-        [self.sectorHighlight removeFromSuperlayer];
+     //   [self.sectorHighlight removeFromSuperlayer];
         return;
     }
     
