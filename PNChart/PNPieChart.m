@@ -54,6 +54,7 @@
 }
 
 - (void)awakeFromNib{
+    [super awakeFromNib];
     [self baseInit];
 }
 
@@ -134,6 +135,8 @@
     
     for (int i = 0; i < _items.count; i++) {
         UILabel *descriptionLabel =  [self descriptionLabelForItemAtIndex:i];
+        [descriptionLabel setTag:i];
+        [descriptionLabel setAlpha:0];
         [_contentView addSubview:descriptionLabel];
         [_descriptionLabels addObject:descriptionLabel];
     }
@@ -278,7 +281,7 @@
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag{
     [_descriptionLabels enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         [UIView animateWithDuration:0.2 animations:^(){
-            [obj setAlpha:1];
+            //[obj setAlpha:1];
         }];
     }];
 }
@@ -337,9 +340,17 @@
                                           startPercentage:startPercentage
                                             endPercentage:endPercentage];
     
+    for (UIView* view in _contentView.subviews) {
+        if (view.tag == index) {
+            [view setAlpha:1];
+        } else {
+            [view setAlpha:0];
+        }
+    }
+    
     if (self.enableMultipleSelection)
     {
-        NSString *dictIndex = [NSString stringWithFormat:@"%d", index];
+        NSString *dictIndex = [NSString stringWithFormat:@"%ld", (long)index];
         CAShapeLayer *indexShape = [self.selectedItems valueForKey:dictIndex];
         if (indexShape)
         {
